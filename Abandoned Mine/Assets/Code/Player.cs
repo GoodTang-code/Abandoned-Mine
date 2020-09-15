@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float calibrateValue = 2.5f;
     public Vector2 pos;
     public Vector2 pos2;
+    public float torque;
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +26,32 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Z))  //Input.GetAxis("Horizontal") < 0.0f
-        {
-            // Add force * press time
-            // addForceAtPosition
-            //rb.AddForce(transform.up * forceAdded);
-            if (Input.GetKey(KeyCode.M)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos);
-            else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos);
+        //if (Input.GetKey(KeyCode.Z))  //Input.GetAxis("Horizontal") < 0.0f
+        //{
+        //    // Add force * press time
+        //    // addForceAtPosition
+        //    //rb.AddForce(transform.up * forceAdded);
+        //    if (Input.GetKey(KeyCode.M)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos);
+        //    else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos);
+        //}
+        //if (Input.GetKey(KeyCode.M))
+        //{
+        //    if (Input.GetKey(KeyCode.Z)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos2);
+        //    else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos2);
+        //}
+
+        if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.M)){
+            rb.AddForce(transform.up * forceAdded);
         }
-        if (Input.GetKey(KeyCode.M))
-        {
-            if (Input.GetKey(KeyCode.Z)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos2);
-            else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos2);
+        else if (Input.GetKey(KeyCode.Z)){
+            rb.AddTorque(torque * -1);
+            rb.AddForce(transform.up * forceAdded / calibrateValue);
+
+        }
+        else if (Input.GetKey(KeyCode.M)){
+            rb.AddTorque(torque );
+            rb.AddForce(transform.up * forceAdded / calibrateValue);
+
         }
 
         if (Input.touchCount > 0)
