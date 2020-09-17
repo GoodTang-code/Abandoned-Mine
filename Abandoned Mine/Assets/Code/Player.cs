@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float forceAdded = 30000.0f;
-    public float showVelo;
+    public float veloX;
+    public float veloY;
     public float calibrateValue = 2.5f;
     public Vector2 pos;
     public Vector2 pos2;
@@ -21,7 +22,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        showVelo = rb.velocity.y;
+        veloX = rb.velocity.x;
+        veloY = rb.velocity.y;
     }
 
     void FixedUpdate()
