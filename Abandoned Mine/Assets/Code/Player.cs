@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     public Vector2 pos;
     public Vector2 pos2;
     public float torque = 1200;
-    public float rayLength = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +27,7 @@ public class Player : MonoBehaviour
     {
         //veloX = rb.velocity.x;
         //veloY = rb.velocity.y;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.0f,-0.8f,0.0f), Vector2.down, rayLength);
-        Debug.DrawRay(transform.position + new Vector3(0.0f, -0.8f, 0.0f), Vector2.down * rayLength, Color.red);
-        if (hit)
-        {
-            Debug.Log("Hit" + hit.collider.name);
-        }
+        
     }
 
     void FixedUpdate()

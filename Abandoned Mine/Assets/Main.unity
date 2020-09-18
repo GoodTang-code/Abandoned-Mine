@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242598560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -182.71, y: 90.24, z: -336.58286}
+  m_LocalPosition: {x: -120.91, y: 90.82, z: -336.58286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -228,7 +228,7 @@ Rigidbody2D:
   m_Mass: 6000
   m_LinearDrag: 0.03
   m_AngularDrag: 0
-  m_GravityScale: 0.25
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -296,7 +296,6 @@ MonoBehaviour:
   pos: {x: -5, y: 0}
   pos2: {x: 5, y: 0}
   torque: 1200
-  rayLength: 2
 --- !u!1 &310976605
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,13 +566,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563032024}
-  m_LocalRotation: {x: -0, y: -0, z: -0.009049741, w: 0.99995905}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0.28, z: 336.58286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 242598562}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &563032026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +632,11 @@ MonoBehaviour:
   lightPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
   degMinus: 90
+  rayLength: 3.3
+  hitupDistance: 0
+  hitdownDistance: 0
+  xVeloLimit: 0.4
+  smooth: 5
 --- !u!1 &765758127
 GameObject:
   m_ObjectHideFlags: 0
