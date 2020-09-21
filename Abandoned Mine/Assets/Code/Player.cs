@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     public Vector2 pos;
     public Vector2 pos2;
     public float torque = 1200;
+    public GameObject engineFire_1;
+    public GameObject engineFire_2;
 
     // Start is called before the first frame update
     void Start()
@@ -50,22 +52,34 @@ public class Player : MonoBehaviour
             rb.AddForce(transform.up * forceAdded);
             fuelConsump = forceAdded * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+
+            engineFire_1.active = true;
+            engineFire_2.active = true;
         }
         else if (Input.GetKey(KeyCode.Z)){
             rb.AddTorque(torque * -1);
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+
+            engineFire_1.active = true;
+            engineFire_2.active = false;
         }
         else if (Input.GetKey(KeyCode.M)){
             rb.AddTorque(torque );
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+
+            engineFire_1.active = false;
+            engineFire_2.active = true;
         }
         else
         {
             fuelConsump = 0;
+
+            engineFire_1.active = false;
+            engineFire_2.active = false;
         }
 
         //if (Input.touchCount > 0)
