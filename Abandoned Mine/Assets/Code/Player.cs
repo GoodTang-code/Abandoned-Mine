@@ -15,13 +15,18 @@ public class Player : MonoBehaviour
     public Vector2 pos;
     public Vector2 pos2;
     public float torque = 1200;
-    public GameObject engineFire_1;
-    public GameObject engineFire_2;
+
+    public GameObject engineObjLeft;
+    public GameObject engineObjRight;
+    private Engine engineLeft;
+    private Engine engineRight;
 
     // Start is called before the first frame update
     void Start()
     {
 
+        engineLeft = engineObjLeft.GetComponent<Engine>();
+        engineRight = engineObjRight.GetComponent<Engine>();
     }
 
     // Update is called once per frame
@@ -53,33 +58,29 @@ public class Player : MonoBehaviour
             fuelConsump = forceAdded * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
 
-            engineFire_1.active = true;
-            engineFire_2.active = true;
+            engineLeft.thrusterOn = true;
+            engineRight.thrusterOn = true;
         }
         else if (Input.GetKey(KeyCode.Z)){
             rb.AddTorque(torque * -1);
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
-
-            engineFire_1.active = true;
-            engineFire_2.active = false;
+            engineLeft.thrusterOn = true;
         }
         else if (Input.GetKey(KeyCode.M)){
             rb.AddTorque(torque );
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
-
-            engineFire_1.active = false;
-            engineFire_2.active = true;
+            engineRight.thrusterOn = true;
         }
         else
         {
             fuelConsump = 0;
 
-            engineFire_1.active = false;
-            engineFire_2.active = false;
+            engineLeft.thrusterOn = false;
+            engineRight.thrusterOn = false;
         }
 
         //if (Input.touchCount > 0)
