@@ -21,7 +21,8 @@ public class UIStatus : MonoBehaviour
     void Update()
     {
         velo.text = "velocity x :" + Math.Round(playerRb.velocity.x * 10, 2) + "\n" +
-                    "velocity y :" + Math.Round(playerRb.velocity.y * 10, 2);
+                    "velocity y :" + Math.Round(playerRb.velocity.y * 10, 2) + "\n" +
+                    "velocity :";
         fuelLeft.text = "Fuel left : " + Math.Round(player.fuelTank,2);
     }
 }

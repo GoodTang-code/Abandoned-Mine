@@ -9,29 +9,50 @@ public class LandingGear : MonoBehaviour
     public float rayLength = 1.2f;
     public float speed = 0.5f;
     Vector2 flyingPos = new Vector2(0f, 0f);
-    //bool gearIsWorking = false;
-    //bool gearUp;
 
     LayerMask layerMask = 1 << 8; //use bit
+    private Player player;
+
+    public float minMagnitude = 0.25f;
+    public float maxMagnitude = 1.65f;
+    float maxDamage;
 
     void Start()
     {
+        GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+        player = playerObj[0].GetComponent<Player>();
+
+        maxDamage = hp;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        float impact = col.relativeVelocity.magnitude;
+        if (impact < minMagnitude) impact = minMagnitude;
+        if (impact > maxMagnitude) impact = maxMagnitude;
+        float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
+        hp -= damage;
 
     }
 
-    // Update is called once per frame
+        // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (hp <= 0)
+        {
+            hp = 0;
+            spawnBroken();
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (player.hp <= 0f) return;
+
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, layerMask);
         Debug.DrawLine(transform.position, hit1.point, Color.blue);
-        if (hit1 && LandingGearStatus() != "Land")
-        {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, landingPos, Time.deltaTime * speed);
-        }
-        if (!hit1 && LandingGearStatus() != "Fly")
-        {
-            transform.localPosition = Vector2.MoveTowards(transform.localPosition, flyingPos, Time.deltaTime * speed);
-        }
+        if (hit1 && LandingGearStatus() != "Land") transform.localPosition = Vector2.MoveTowards(transform.localPosition, landingPos, Time.deltaTime * speed);
+        if (!hit1 && LandingGearStatus() != "Fly") transform.localPosition = Vector2.MoveTowards(transform.localPosition, flyingPos, Time.deltaTime * speed);
 
     }
 
@@ -40,6 +61,11 @@ public class LandingGear : MonoBehaviour
         if (localPosV2() == landingPos) return "Land";
         else if (localPosV2() == flyingPos) return "Fly";
         else return "Working";
+    }
+
+    void spawnBroken()
+    {
+
     }
 
     Vector2 localPosV2()

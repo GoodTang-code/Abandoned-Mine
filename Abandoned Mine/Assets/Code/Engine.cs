@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
+    //public Rigidbody2D EngineRb;
+    public float hp = 100f;
     LayerMask layerMask = 1 << 8; //use bit
     public GameObject fire;
     public GameObject dust;
@@ -12,13 +14,42 @@ public class Engine : MonoBehaviour
     // ------------------------------ Component
     public bool thrusterOn = false;
 
+    public float minMagnitude = 0.4f;
+    public float maxMagnitude = 2.2f;
+    float maxDamage;
+
+    public bool isBroken = false;
+    //private Player player;
+
     void Start()
     {
-        
+        //GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+        //player = playerObj[0].GetComponent<Player>();
+
+        maxDamage = hp;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        float impact = col.relativeVelocity.magnitude;
+        if (impact < minMagnitude) impact = minMagnitude;
+        if (impact > maxMagnitude) impact = maxMagnitude;
+        float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
+        hp -= damage;
+
+        //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
     }
 
     void FixedUpdate()
     {
+        if (hp <= 0)
+        {
+            hp = 0;
+            spawnBroken();
+            gameObject.SetActive(false);
+            return;
+        }
+
         if (thrusterOn)
         {
             fire.SetActive(true);
@@ -32,5 +63,10 @@ public class Engine : MonoBehaviour
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, layerMask);
         Debug.DrawLine(transform.position, hit1.point, Color.green);
         if (hit1) Instantiate(dust, hit1.point, dust.transform.rotation);
+    }
+
+    void spawnBroken()
+    {
+
     }
 }

@@ -25,7 +25,7 @@ public class Camera : MonoBehaviour
 
         //transform.LookAt(player);
 
-        velo = Mathf.Pow(player.velocity.x, 2) + Mathf.Pow(player.velocity.y,2);
+        velo = Mathf.Pow(player.velocity.x, 2) + Mathf.Pow(player.velocity.y, 2);
 
         desiredCamSize = ((velo / maxThruster) * (maxCamSize - minCamSize)) + minCamSize;
         float smoothCamSize = Mathf.Lerp(UnityEngine.Camera.main.orthographicSize, desiredCamSize, smooth); 
