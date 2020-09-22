@@ -6,53 +6,31 @@ public class Player : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float forceAdded = 12000.0f;
-    public float fuelTank = 10000;
-    public float fuelConsump;
+    public float fuelTank = 10000f;
     public float fuelConsumpPerUnit = 0.0004f; // unit per fuelConsump
-    //public float veloX;
-    //public float veloY;
-    public float calibrateValue = 4f;
-    public Vector2 pos;
-    public Vector2 pos2;
-    public float torque = 1200;
+    public float calibrateValue = 4f; // calibrate from full power to only side power
+    public float torque = 1200f; // Torque Power
 
     public GameObject engineObjLeft;
     public GameObject engineObjRight;
     private Engine engineLeft;
     private Engine engineRight;
 
-    // Start is called before the first frame update
+    float fuelConsump;
+
     void Start()
     {
-
         engineLeft = engineObjLeft.GetComponent<Engine>();
         engineRight = engineObjRight.GetComponent<Engine>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //veloX = rb.velocity.x;
-        //veloY = rb.velocity.y;
         
     }
 
     void FixedUpdate()
     {
-        //if (Input.GetKey(KeyCode.Z))  //Input.GetAxis("Horizontal") < 0.0f
-        //{
-        //    // Add force * press time
-        //    // addForceAtPosition
-        //    //rb.AddForce(transform.up * forceAdded);
-        //    if (Input.GetKey(KeyCode.M)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos);
-        //    else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos);
-        //}
-        //if (Input.GetKey(KeyCode.M))
-        //{
-        //    if (Input.GetKey(KeyCode.Z)) rb.AddForceAtPosition(transform.up * forceAdded, rb.position + pos2);
-        //    else rb.AddForceAtPosition(transform.up * forceAdded / calibrateValue, rb.position + pos2);
-        //}
-
         if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.M)){
             rb.AddForce(transform.up * forceAdded);
             fuelConsump = forceAdded * fuelConsumpPerUnit;

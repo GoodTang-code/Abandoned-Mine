@@ -8,10 +8,13 @@ public class Camera : MonoBehaviour
     public float smooth = 0.125f; // 0 to 1
     public Vector3 offset;
 
-    public float desiredCamSize;
-    public float velo;
-    public float maxThruster = 10f;
-    public float[] camSize = new float[3];
+    public float maxThruster = 10f; // Start from 0, for widest screen
+    public float idleCamSize = 4f;
+    public float minCamSize = 5f;
+    public float maxCamSize = 6.5f;
+
+    float desiredCamSize;
+    float velo;
 
     void FixedUpdate()
     {
@@ -23,10 +26,9 @@ public class Camera : MonoBehaviour
         //transform.LookAt(player);
 
         velo = Mathf.Pow(player.velocity.x, 2) + Mathf.Pow(player.velocity.y,2);
-        desiredCamSize = ((velo / maxThruster) * (camSize[2] - camSize[1])) + camSize[1];
+
+        desiredCamSize = ((velo / maxThruster) * (maxCamSize - minCamSize)) + minCamSize;
         float smoothCamSize = Mathf.Lerp(UnityEngine.Camera.main.orthographicSize, desiredCamSize, smooth); 
-
-
 
         UnityEngine.Camera.main.orthographicSize = smoothCamSize;
     }
