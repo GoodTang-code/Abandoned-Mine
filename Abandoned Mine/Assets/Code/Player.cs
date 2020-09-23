@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public float calibrateValue = 4f; // calibrate from full power to only side power
     public float torque = 1200f; // Torque Power
 
+    public ProgressBar hpBar;
+    public ProgressBar fuelBar;
+
     public GameObject engineObjLeft;
     public GameObject engineObjRight;
     private Engine engineLeft;
@@ -37,6 +40,12 @@ public class Player : MonoBehaviour
         rb.mass = shipWeight;
 
         maxDamage = hp;
+
+        //UI
+        hpBar.maximum = hp;
+        hpBar.current = hp;
+        fuelBar.maximum = fuelTank;
+        fuelBar.current = fuelTank;
     }
 
     void Update()
@@ -124,6 +133,8 @@ public class Player : MonoBehaviour
         float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
         hp -= damage;
 
+        //UI
+        hpBar.current = hp;
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
     }
 
@@ -134,6 +145,7 @@ public class Player : MonoBehaviour
             rb.AddForce(transform.up * forceAdded);
             fuelConsump = forceAdded * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+            fuelBar.current = fuelTank;
         }
         else if (engineLeft.thrusterOn == true && engineRight.thrusterOn == false)
         {
@@ -141,6 +153,7 @@ public class Player : MonoBehaviour
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+            fuelBar.current = fuelTank;
         }
         else if (engineLeft.thrusterOn == false && engineRight.thrusterOn == true)
         {
@@ -148,6 +161,7 @@ public class Player : MonoBehaviour
             rb.AddForce(transform.up * forceAdded / calibrateValue);
             fuelConsump = (forceAdded / calibrateValue) * fuelConsumpPerUnit + torque * fuelConsumpPerUnit;
             fuelTank -= fuelConsump;
+            fuelBar.current = fuelTank;
 
         }
         else fuelConsump = 0;

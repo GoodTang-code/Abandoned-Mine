@@ -17,12 +17,18 @@ public class LandingGear : MonoBehaviour
     public float maxMagnitude = 1.65f;
     float maxDamage;
 
+    public ProgressBar hpBar;
+
     void Start()
     {
         GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
         player = playerObj[0].GetComponent<Player>();
 
         maxDamage = hp;
+
+        //UI
+        hpBar.maximum = hp;
+        hpBar.current = hp;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -33,9 +39,12 @@ public class LandingGear : MonoBehaviour
         float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
         hp -= damage;
 
+        //UI
+        hpBar.current = hp;
+
     }
 
-        // Update is called once per frame
+    // Update is called once per frame
     void FixedUpdate()
     {
 

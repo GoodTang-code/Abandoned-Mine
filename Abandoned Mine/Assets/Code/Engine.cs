@@ -20,6 +20,7 @@ public class Engine : MonoBehaviour
 
     public bool isBroken = false;
     //private Player player;
+    public ProgressBar hpBar;
 
     void Start()
     {
@@ -27,6 +28,10 @@ public class Engine : MonoBehaviour
         //player = playerObj[0].GetComponent<Player>();
 
         maxDamage = hp;
+
+        //UI
+        hpBar.maximum = hp;
+        hpBar.current = hp;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -36,6 +41,9 @@ public class Engine : MonoBehaviour
         if (impact > maxMagnitude) impact = maxMagnitude;
         float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
         hp -= damage;
+
+        //UI
+        hpBar.current = hp;
 
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
     }
