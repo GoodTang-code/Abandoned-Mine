@@ -6,14 +6,20 @@ using System; //Math.Round
 public class Player : MonoBehaviour
 {
     public float hp = 100f;
-    public Rigidbody2D rb;
+    public int passenger = 0;
+    public int cap = 5; // Passenger Capacity
+    public float fuelTank = 10000f;
+    public float fuelTankMax = 10000f;
     public float shipWeight = 6000f;
     public float forceAdded = 12000.0f;
-    public float fuelTank = 10000f;
+    public bool isLanded = false;
+    public bool readyToFly = true;
+
+    public Rigidbody2D rb;
     public float fuelConsumpPerUnit = 0.0004f; // unit per fuelConsump
     public float velo;
     public float calibrateValue = 4f; // calibrate from full power to only side power
-    public float torque = 1200f; // Torque Power
+    float torque; // Torque Power
 
     public ProgressBar hpBar;
     public ProgressBar fuelBar;
@@ -25,10 +31,12 @@ public class Player : MonoBehaviour
 
     float fuelConsump;
 
+    // Impact
     public float minMagnitude = 0.6f;
     public float maxMagnitude = 2.2f;
     float maxDamage;
 
+    //Start Fly
     public float standWeight = 20000f;
     public float weightSmooth = 15f;
 
@@ -38,13 +46,14 @@ public class Player : MonoBehaviour
         engineRight = engineObjRight.GetComponent<Engine>();
 
         rb.mass = shipWeight;
+        torque = forceAdded / 10;
 
         maxDamage = hp;
 
         //UI
         hpBar.maximum = hp;
         hpBar.current = hp;
-        fuelBar.maximum = fuelTank;
+        fuelBar.maximum = fuelTankMax;
         fuelBar.current = fuelTank;
     }
 
@@ -71,6 +80,9 @@ public class Player : MonoBehaviour
             rb.mass = desiredWeight;
 
         }
+
+        if (velo < 0.0001f) isLanded = true;
+        else isLanded = false;
     }
 
     void FixedUpdate()
@@ -84,22 +96,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.M)){
-            engineLeft.thrusterOn = true;
-            engineRight.thrusterOn = true;
-        }
-        else if (Input.GetKey(KeyCode.Z)){
-            engineLeft.thrusterOn = true;
-            engineRight.thrusterOn = false;
-        }
-        else if (Input.GetKey(KeyCode.M)){
-            engineLeft.thrusterOn = false;
-            engineRight.thrusterOn = true;
-        }
-        else{
-            engineLeft.thrusterOn = false;
-            engineRight.thrusterOn = false;
-        }
+        if (readyToFly) ReceiveControl();
 
         thrusterWork();
 
@@ -136,6 +133,32 @@ public class Player : MonoBehaviour
         //UI
         hpBar.current = hp;
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
+    }
+
+    void ReceiveControl()
+    {
+
+        if (Input.GetKey(KeyCode.Z) && Input.GetKey(KeyCode.M))
+        {
+            engineLeft.thrusterOn = true;
+            engineRight.thrusterOn = true;
+        }
+        else if (Input.GetKey(KeyCode.Z))
+        {
+            engineLeft.thrusterOn = true;
+            engineRight.thrusterOn = false;
+        }
+        else if (Input.GetKey(KeyCode.M))
+        {
+            engineLeft.thrusterOn = false;
+            engineRight.thrusterOn = true;
+        }
+        else
+        {
+            engineLeft.thrusterOn = false;
+            engineRight.thrusterOn = false;
+        }
+
     }
 
     void thrusterWork()
