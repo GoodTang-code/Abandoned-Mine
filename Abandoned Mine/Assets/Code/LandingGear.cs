@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class LandingGear : MonoBehaviour
 {
+    public float hpMax = 100f;
     public float hp = 100f;
     public Vector2 landingPos;
     public float rayLength = 1.2f;
     public float speed = 0.5f;
+    public bool isOk = true;
     Vector2 flyingPos = new Vector2(0f, 0f);
 
-    LayerMask layerMask = 1 << 8; //use bit
-    private Player player;
+    LayerMask layerMask = 1 << 9; //use bit
+    //private Player player;
 
     public float minMagnitude = 0.25f;
     public float maxMagnitude = 1.65f;
@@ -21,8 +23,8 @@ public class LandingGear : MonoBehaviour
 
     void Start()
     {
-        GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
-        player = playerObj[0].GetComponent<Player>();
+        //GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
+        //player = playerObj[0].GetComponent<Player>();
 
         maxDamage = hp;
 
@@ -52,13 +54,17 @@ public class LandingGear : MonoBehaviour
         {
             hp = 0;
             spawnBroken();
-            gameObject.SetActive(false);
-            return;
+            gameObject.SetActive(false); // FIX This !!!
+            isOk = false;
+        }else
+        {
+            //if (gameObject.activeSelf == false) gameObject.SetActive(true);
+            isOk = true;
         }
 
-        if (player.hp <= 0f) return;
+        if (!isOk) return;
 
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, layerMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, ~layerMask);
         Debug.DrawLine(transform.position, hit1.point, Color.blue);
         if (hit1 && LandingGearStatus() != "Land") transform.localPosition = Vector2.MoveTowards(transform.localPosition, landingPos, Time.deltaTime * speed);
         if (!hit1 && LandingGearStatus() != "Fly") transform.localPosition = Vector2.MoveTowards(transform.localPosition, flyingPos, Time.deltaTime * speed);

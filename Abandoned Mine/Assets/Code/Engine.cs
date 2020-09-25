@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
-    //public Rigidbody2D EngineRb;
+    public float hpMax = 100f;
     public float hp = 100f;
-    LayerMask layerMask = 1 << 8; //use bit
+    public bool isOk = true;
+    LayerMask layerMask = 1 << 9; //use bit
     public GameObject fire;
     public GameObject dust;
     public float rayLength = 1f;
@@ -24,9 +25,6 @@ public class Engine : MonoBehaviour
 
     void Start()
     {
-        //GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
-        //player = playerObj[0].GetComponent<Player>();
-
         maxDamage = hp;
 
         //UI
@@ -55,10 +53,13 @@ public class Engine : MonoBehaviour
             hp = 0;
             spawnBroken();
             gameObject.SetActive(false);
-            return;
+            isOk = false;
+        }else
+        {
+            isOk = true;
         }
 
-        if (thrusterOn)
+        if (thrusterOn && isOk)
         {
             fire.SetActive(true);
             spawnDust();
@@ -68,7 +69,7 @@ public class Engine : MonoBehaviour
 
     void spawnDust()
     {
-        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, layerMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, -transform.up, rayLength, ~layerMask);
         Debug.DrawLine(transform.position, hit1.point, Color.green);
         if (hit1) Instantiate(dust, hit1.point, dust.transform.rotation);
     }

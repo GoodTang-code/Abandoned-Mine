@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Dungeon
   - Station
+  - EngineLeft
+  - EngineRight
   layers:
   - Default
   - TransparentFX

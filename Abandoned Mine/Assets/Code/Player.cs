@@ -5,6 +5,7 @@ using System; //Math.Round
 
 public class Player : MonoBehaviour
 {
+    public float hpMax = 100;
     public float hp = 100f;
     public int passenger = 0;
     public int cap = 5; // Passenger Capacity
@@ -23,11 +24,19 @@ public class Player : MonoBehaviour
 
     public ProgressBar hpBar;
     public ProgressBar fuelBar;
+    //public ProgressBar engineLeftBar;
+    //public ProgressBar engineRightBar;
 
     public GameObject engineObjLeft;
     public GameObject engineObjRight;
-    private Engine engineLeft;
-    private Engine engineRight;
+    public Engine engineLeft;
+    public Engine engineRight;
+
+
+    public GameObject gearObjLeft;
+    public GameObject gearObjRight;
+    public LandingGear gearLeft;
+    public LandingGear gearRight;
 
     float fuelConsump;
 
@@ -44,6 +53,8 @@ public class Player : MonoBehaviour
     {
         engineLeft = engineObjLeft.GetComponent<Engine>();
         engineRight = engineObjRight.GetComponent<Engine>();
+        gearLeft = gearObjLeft.GetComponent<LandingGear>();
+        gearRight = gearObjRight.GetComponent<LandingGear>();
 
         rb.mass = shipWeight;
         torque = forceAdded / 10;
@@ -93,12 +104,18 @@ public class Player : MonoBehaviour
             fuelTank = 0;
             engineLeft.thrusterOn = false;
             engineRight.thrusterOn = false;
-            return;
+            readyToFly = false;
         }
 
-        if (readyToFly) ReceiveControl();
-
-        thrusterWork();
+        if (readyToFly)
+        {
+            ReceiveControl();
+            thrusterWork();
+        }else
+        {
+            gearRight.isOk = false;
+            gearLeft.isOk = false;
+        }
 
         //if (Input.touchCount > 0)
         //{
@@ -131,8 +148,19 @@ public class Player : MonoBehaviour
         hp -= damage;
 
         //UI
-        hpBar.current = hp;
+        UpdateStatusBar();
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
+    }
+
+    public void UpdateStatusBar()
+    {
+        hpBar.current = hp;
+        fuelBar.current = fuelTank;
+        engineLeft.hpBar.current = engineLeft.hp;
+        engineRight.hpBar.current = engineRight.hp;
+        gearLeft.hpBar.current = gearLeft.hp;
+        gearRight.hpBar.current = gearRight.hp;
+
     }
 
     void ReceiveControl()
