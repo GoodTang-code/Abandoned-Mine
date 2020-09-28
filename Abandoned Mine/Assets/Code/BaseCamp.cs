@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BaseCamp : MonoBehaviour
 {
+    public playerSO player;
     public string campName;
     public int person = 0;
     //public float fuelLeft;
@@ -19,15 +20,10 @@ public class BaseCamp : MonoBehaviour
     public Toggle repairToggle;
     public Toggle refuelToggle;
 
-    Player player;
-
     void Start()
     {
         TransferMenu.SetActive(false);
         btn.SetActive(false);
-
-        GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
-        player = playerObj[0].GetComponent<Player>();
 
         campNameBtn.text = campName;
         campNameText.text = campName;
@@ -62,31 +58,21 @@ public class BaseCamp : MonoBehaviour
         // Send Passenger
         if (personToggle.isOn)
         {
-            person = player.passenger;
-            player.passenger = 0;
+            person += player.nowPassenger;
+            player.nowPassenger = 0;
         }
         // Refuel
         if (refuelToggle.isOn)
         {
-            player.fuelTank = player.fuelTankMax;
-            player.UpdateStatusBar();
+            player.Refuel();
         }
 
         // Repair
         if (repairToggle.isOn)
         {
-            player.hp = player.hpMax;
-            player.engineLeft.hp = player.engineLeft.hpMax;
-            player.engineRight.hp = player.engineRight.hpMax;
-            player.gearLeft.hp = player.gearLeft.hpMax;
-            player.gearRight.hp = player.gearRight.hpMax;
 
-            player.engineObjLeft.SetActive(true);
-            player.engineObjRight.SetActive(true);
-            player.gearObjLeft.SetActive(true);
-            player.gearObjRight.SetActive(true);
+            player.RepairAll();
 
-            player.UpdateStatusBar();
         }
 
         campPerson.text = person.ToString() + " person(s)";

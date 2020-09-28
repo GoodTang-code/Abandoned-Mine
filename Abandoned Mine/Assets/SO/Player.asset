@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107fffe298fa64a67b00138ff5d0ae9f, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  maxHps:
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  nowHps:
+  - 100
+  - 100
+  - 100
+  - 100
+  - 100
+  maxPassenger: 5
+  nowPassenger: 0
+  maxFuel: 10000
+  nowFuel: 10000
+  shipWeight: 6000
+  forceAdded: 12000
+  isLanded: 1
+  readyToFly: 1
+  fuelConsumpPerUnit: 0.0004
+  calibrateValue: 4
+  standWeight: 16000
+  weightSmooth: 0.05
+  minMagnitude: 0.6
+  maxMagnitude: 2.2

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Station : MonoBehaviour
 {
+    public playerSO player;
+
     public string campName;
     public int person;
     public float fuelLeft;
@@ -19,15 +21,10 @@ public class Station : MonoBehaviour
     public Toggle personToggle;
     public Toggle fuelToggle;
 
-    Player player;
-
     void Start()
     {
         TransferMenu.SetActive(false);
         btn.SetActive(false);
-
-        GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
-        player = playerObj[0].GetComponent<Player>();
 
         campNameBtn.text = campName;
         campNameText.text = campName;
@@ -63,23 +60,22 @@ public class Station : MonoBehaviour
         // change player Passenger
         if (personToggle.isOn)
         {
-            int loadPerson = player.cap - player.passenger; // 3
+            int loadPerson = player.maxPassenger - player.nowPassenger; 
             if (person < loadPerson)
                 loadPerson = person;
 
             person -= loadPerson;
-            player.passenger += loadPerson;
+            player.nowPassenger += loadPerson;
         }
         // Changer Player Fuel tank
         if (fuelToggle.isOn)
         {
-            float loadFuel = player.fuelTankMax - player.fuelTank; // 3
+            float loadFuel = player.maxFuel - player.nowFuel; 
             if (fuelLeft < loadFuel)
                 loadFuel = fuelLeft;
 
             fuelLeft -= loadFuel;
-            player.fuelTank += loadFuel;
-            player.fuelBar.current = player.fuelTank;
+            player.nowFuel += loadFuel;
         }
 
         campPerson.text = person.ToString() + " person(s)";
@@ -90,8 +86,6 @@ public class Station : MonoBehaviour
         TransferMenu.SetActive(false);
         btn.SetActive(true);
         player.readyToFly = true;
-
-
     }
 
     public void OpenStationMenu()

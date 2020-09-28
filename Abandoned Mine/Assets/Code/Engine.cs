@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
-    public float hpMax = 100f;
-    public float hp = 100f;
+    public int hpIndex;
+    public playerSO player;
     public bool isOk = true;
+    public bool thrusterOn = false;
+
     LayerMask layerMask = 1 << 9; //use bit
+
     public GameObject fire;
     public GameObject dust;
+
     public float rayLength = 1f;
 
     // ------------------------------ Component
-    public bool thrusterOn = false;
 
     public float minMagnitude = 0.4f;
     public float maxMagnitude = 2.2f;
     float maxDamage;
 
     public bool isBroken = false;
-    //private Player player;
-    public ProgressBar hpBar;
 
     void Start()
     {
-        maxDamage = hp;
-
-        //UI
-        hpBar.maximum = hp;
-        hpBar.current = hp;
+        maxDamage = player.maxHps[hpIndex];
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -38,19 +35,21 @@ public class Engine : MonoBehaviour
         if (impact < minMagnitude) impact = minMagnitude;
         if (impact > maxMagnitude) impact = maxMagnitude;
         float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
-        hp -= damage;
-
-        //UI
-        hpBar.current = hp;
+        maxDamage = player.nowHps[hpIndex] -= damage;
 
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
     }
 
+    private void Update()
+    {
+        if (player.nowFuel <= 0 | player.nowHps[hpIndex] <= 0f)
+            isOk = false;
+    }
     void FixedUpdate()
     {
-        if (hp <= 0)
+        if (player.nowHps[hpIndex] <= 0)
         {
-            hp = 0;
+            player.nowHps[hpIndex] = 0;
             spawnBroken();
             gameObject.SetActive(false);
             isOk = false;

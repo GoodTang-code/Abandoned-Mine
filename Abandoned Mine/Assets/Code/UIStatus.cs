@@ -6,23 +6,40 @@ using System; //Math.Round
     
 public class UIStatus : MonoBehaviour
 {
-    public Rigidbody2D playerRb;
-    public GameObject playerObj;
-    public Text velo;
-    public Text fuelLeft;
+    public ProgressBar[] bars;
+    public ProgressBar passengerBar;
+    public ProgressBar fuelBar;
+    //public ProgressBar leftEngineHPBar;
+    //public ProgressBar rightEngineHPBar;
+    //public ProgressBar leftGearHPBar;
+    //public ProgressBar rightGearHPBar;
 
-    private Player player;
+    ////SO Value
+    public playerSO player;
+    //public HPSO leftEngineHP;
+    //public HPSO rightEngineHP;
+    //public HPSO leftGearHP;
+    //public HPSO rightGearHP;
+
 
     void Start()
     {
-        player = playerObj.GetComponent<Player>();
     }
 
     void Update()
     {
-        velo.text = "velocity x :" + Math.Round(playerRb.velocity.x * 10, 2) + "\n" +
-                    "velocity y :" + Math.Round(playerRb.velocity.y * 10, 2) + "\n" +
-                    "velocity :";
-        fuelLeft.text = "Fuel left : " + Math.Round(player.fuelTank,2);
+
+        for (int i = 0; i < player.nowHps.Length; i++)
+        {
+            bars[i].maxHp = player.maxHps[i];
+            bars[i].hp = player.nowHps[i];
+        }
+
+        passengerBar.maxHp = player.maxPassenger;
+        passengerBar.hp = player.nowPassenger;
+
+        fuelBar.maxHp = player.maxFuel;
+        fuelBar.hp = player.nowFuel;
+
     }
 }

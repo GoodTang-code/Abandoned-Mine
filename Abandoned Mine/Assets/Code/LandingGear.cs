@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class LandingGear : MonoBehaviour
 {
-    public float hpMax = 100f;
-    public float hp = 100f;
+    public int hpIndex;
+    public playerSO player;
+
+    public bool isOk = true;
+
     public Vector2 landingPos;
     public float rayLength = 1.2f;
     public float speed = 0.5f;
-    public bool isOk = true;
     Vector2 flyingPos = new Vector2(0f, 0f);
 
     LayerMask layerMask = 1 << 9; //use bit
@@ -19,18 +21,13 @@ public class LandingGear : MonoBehaviour
     public float maxMagnitude = 1.65f;
     float maxDamage;
 
-    public ProgressBar hpBar;
-
     void Start()
     {
         //GameObject[] playerObj = GameObject.FindGameObjectsWithTag("Player");
         //player = playerObj[0].GetComponent<Player>();
 
-        maxDamage = hp;
+        maxDamage = player.maxHps[hpIndex];
 
-        //UI
-        hpBar.maximum = hp;
-        hpBar.current = hp;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -39,10 +36,8 @@ public class LandingGear : MonoBehaviour
         if (impact < minMagnitude) impact = minMagnitude;
         if (impact > maxMagnitude) impact = maxMagnitude;
         float damage = ((impact - minMagnitude) / (maxMagnitude - minMagnitude)) * maxDamage;
-        hp -= damage;
+        player.nowHps[hpIndex] -= damage;
 
-        //UI
-        hpBar.current = hp;
 
     }
 
@@ -50,9 +45,9 @@ public class LandingGear : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (hp <= 0)
+        if (player.nowHps[hpIndex] <= 0)
         {
-            hp = 0;
+            player.nowHps[hpIndex] = 0;
             spawnBroken();
             gameObject.SetActive(false); // FIX This !!!
             isOk = false;

@@ -9,9 +9,8 @@ public class ProgressBar : MonoBehaviour
     //public GameObject targetObj;
     //private hpUI target;
 
-    public float maximum = 100;
-    public float current = 100;
-
+    public float hp;
+    public float maxHp;
     public float smooth = 0.5f;
     public Image fill;
     public Image shadow;
@@ -33,7 +32,7 @@ public class ProgressBar : MonoBehaviour
 
     void GetCurrentFill()
     {
-        float targetAmount = (float)current / (float)maximum;
+        float targetAmount = hp / maxHp;
 
         if (fill.fillAmount != targetAmount)
             fill.fillAmount = targetAmount;
