@@ -18,6 +18,8 @@ public class ProgressBar : MonoBehaviour
 
     void Start()
     {
+        hp = 100;
+        maxHp = 100;
         fill.fillAmount = 1f;
         shadow.fillAmount = 1f;
         fill.color = color.Evaluate(1f);

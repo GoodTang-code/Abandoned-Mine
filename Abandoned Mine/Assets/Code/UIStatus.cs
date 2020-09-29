@@ -7,39 +7,26 @@ using System; //Math.Round
 public class UIStatus : MonoBehaviour
 {
     public ProgressBar[] bars;
-    public ProgressBar passengerBar;
-    public ProgressBar fuelBar;
-    //public ProgressBar leftEngineHPBar;
-    //public ProgressBar rightEngineHPBar;
-    //public ProgressBar leftGearHPBar;
-    //public ProgressBar rightGearHPBar;
 
-    ////SO Value
     public playerSO player;
-    //public HPSO leftEngineHP;
-    //public HPSO rightEngineHP;
-    //public HPSO leftGearHP;
-    //public HPSO rightGearHP;
+    public EngineSO[] part;
 
-
-    void Start()
+    void FixedUpdate()
     {
-    }
+        bars[0].maxHp = player.maxHp;
+        bars[0].hp = player.nowHp;
 
-    void Update()
-    {
-
-        for (int i = 0; i < player.nowHps.Length; i++)
+        for (int i = 0; i < part.Length; i++)
         {
-            bars[i].maxHp = player.maxHps[i];
-            bars[i].hp = player.nowHps[i];
+            bars[i+1].maxHp = part[i].maxHp;
+            bars[i+1].hp = part[i].nowHp;
         }
 
-        passengerBar.maxHp = player.maxPassenger;
-        passengerBar.hp = player.nowPassenger;
+        bars[5].maxHp = (float)player.maxPassenger;
+        bars[5].hp = (float)player.nowPassenger;
 
-        fuelBar.maxHp = player.maxFuel;
-        fuelBar.hp = player.nowFuel;
+        bars[6].maxHp = player.maxFuel;
+        bars[6].hp = player.nowFuel;
 
     }
 }

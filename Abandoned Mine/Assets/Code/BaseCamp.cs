@@ -8,6 +8,7 @@ public class BaseCamp : MonoBehaviour
     public playerSO player;
     public string campName;
     public int person = 0;
+    public GameEvent repairAll;
     //public float fuelLeft;
     // Start is called before the first frame update
 
@@ -70,9 +71,7 @@ public class BaseCamp : MonoBehaviour
         // Repair
         if (repairToggle.isOn)
         {
-
-            player.RepairAll();
-
+            repairAll.Raise();
         }
 
         campPerson.text = person.ToString() + " person(s)";

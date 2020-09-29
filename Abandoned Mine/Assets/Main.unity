@@ -356,6 +356,131 @@ MonoBehaviour:
   player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
   gearObjLeft: {fileID: 2058860530}
   gearObjRight: {fileID: 2079358235}
+--- !u!1 &110256898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 110256900}
+  - component: {fileID: 110256899}
+  - component: {fileID: 110256901}
+  - component: {fileID: 110256902}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &110256899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110256898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb581c23db5514f9eab1f975cfa59c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
+  playerTransform: {fileID: 242598562}
+  otherPart:
+  - {fileID: 632233581}
+  - {fileID: 1584607402}
+  - {fileID: 2058860530}
+  - {fileID: 2079358235}
+  playerRigidbody: {fileID: 242598563}
+  engineLeft: {fileID: 11400000, guid: b3b0e1689092b4603abff0a5389de5de, type: 2}
+  engineRight: {fileID: 11400000, guid: d1f6f825ddb2746169e2a83cd37a7d00, type: 2}
+  gearLeft: {fileID: 11400000, guid: 9ec4d2410ad8e4675a3c7c9f390f1347, type: 2}
+  gearRight: {fileID: 11400000, guid: 90f89d9e6b628454b8faea74c12a4f81, type: 2}
+--- !u!4 &110256900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110256898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -137.44, y: 75.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110256901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110256898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5666a57ecd6e4bf6ba52778d86a8c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0f9e15f31fc884942921f29269d60742, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 110256899}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: PartChangeStatus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &110256902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110256898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5666a57ecd6e4bf6ba52778d86a8c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f7433ea5f07724713b64a02302a0f102, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 110256899}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: RepairAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 110256899}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: PartChangeStatus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &121792977
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,7 +843,7 @@ Transform:
   - {fileID: 109532581}
   - {fileID: 563032025}
   - {fileID: 1782300307}
-  - {fileID: 1097944256}
+  - {fileID: 632233582}
   - {fileID: 1584607403}
   - {fileID: 2058860531}
   - {fileID: 2079358236}
@@ -793,14 +918,6 @@ MonoBehaviour:
   playerSO: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
   rb: {fileID: 242598563}
   velo: 0
-  engineObjLeft: {fileID: 632233581}
-  engineObjRight: {fileID: 1584607402}
-  gearObjLeft: {fileID: 2058860530}
-  gearObjRight: {fileID: 2079358235}
-  engineLeft: {fileID: 0}
-  engineRight: {fileID: 0}
-  gearLeft: {fileID: 0}
-  gearRight: {fileID: 0}
 --- !u!1 &259509709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1161,7 @@ MonoBehaviour:
   player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
   campName: Ploendin
   person: 0
+  repairAll: {fileID: 11400000, guid: f7433ea5f07724713b64a02302a0f102, type: 2}
   TransferMenu: {fileID: 1309664588}
   btn: {fileID: 920645839}
   campNameBtn: {fileID: 736251981}
@@ -2461,7 +2579,7 @@ GameObject:
   - component: {fileID: 632233584}
   - component: {fileID: 632233585}
   m_Layer: 9
-  m_Name: EngineLeft_1
+  m_Name: EngineLeft
   m_TagString: EngineLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2475,12 +2593,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632233581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -230.59235, y: -72.97657, z: 0}
+  m_LocalPosition: {x: -0.6000061, y: -0.08000183, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006745734}
-  m_Father: {fileID: 1097944256}
-  m_RootOrder: 0
+  m_Father: {fileID: 242598562}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &632233583
 SpriteRenderer:
@@ -2572,21 +2690,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 632233581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4166524b462a74c809d08dc33f435f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b706d8abcfe04e1fbab0c9a74d2c6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpIndex: 1
-  player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
-  explode: {fileID: 11400000, guid: 74577cbdf06064c50af1e22c017907d0, type: 2}
-  explosionForce: {fileID: 11400000, guid: ba83aac17002649518c544e9b2ed0d64, type: 2}
-  isOk: 1
-  thrusterOn: 0
+  engine: {fileID: 11400000, guid: b3b0e1689092b4603abff0a5389de5de, type: 2}
   fire: {fileID: 1006745733}
   dust: {fileID: 6167150342445622650, guid: 624894be8ec3c411dadf020fa50c9eda, type: 3}
-  rayLength: 1.5
-  minMagnitude: 0.6
-  maxMagnitude: 2.2
-  isBroken: 0
+  EngineBrokenEvent: {fileID: 11400000, guid: 0f9e15f31fc884942921f29269d60742, type: 2}
+  rayLength: 1
 --- !u!1 &661154970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3804,9 +3915,21 @@ PrefabInstance:
       propertyPath: hpValue
       value: 
       objectReference: {fileID: 11400000, guid: 4f071c02595734af4ac7fd9394675b68, type: 2}
+    - target: {fileID: 4594138525619630524, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: hp
+      value: 13.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594138525619630524, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4594138525619630525, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
       propertyPath: m_Name
       value: Passenger
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594138525619630525, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
@@ -3910,7 +4033,7 @@ GameObject:
   - component: {fileID: 988244599}
   - component: {fileID: 988244598}
   m_Layer: 9
-  m_Name: JetLeft_2
+  m_Name: JetRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13950,37 +14073,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &1097944255
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1097944256}
-  m_Layer: 0
-  m_Name: EngineLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1097944256
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097944255}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 229.99234, y: 72.89657, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 632233582}
-  m_Father: {fileID: 242598562}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156887193
 GameObject:
   m_ObjectHideFlags: 0
@@ -14797,9 +14889,14 @@ MonoBehaviour:
   - {fileID: 1090960729}
   - {fileID: 158868481}
   - {fileID: 1922531587}
-  passengerBar: {fileID: 1981718383}
-  fuelBar: {fileID: 824826472}
+  - {fileID: 1981718383}
+  - {fileID: 824826472}
   player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
+  part:
+  - {fileID: 11400000, guid: b3b0e1689092b4603abff0a5389de5de, type: 2}
+  - {fileID: 11400000, guid: d1f6f825ddb2746169e2a83cd37a7d00, type: 2}
+  - {fileID: 11400000, guid: 9ec4d2410ad8e4675a3c7c9f390f1347, type: 2}
+  - {fileID: 11400000, guid: 90f89d9e6b628454b8faea74c12a4f81, type: 2}
 --- !u!1 &1573822463
 GameObject:
   m_ObjectHideFlags: 0
@@ -15009,21 +15106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1584607402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4166524b462a74c809d08dc33f435f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b706d8abcfe04e1fbab0c9a74d2c6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpIndex: 2
-  player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
-  explode: {fileID: 11400000, guid: 74577cbdf06064c50af1e22c017907d0, type: 2}
-  explosionForce: {fileID: 11400000, guid: ba83aac17002649518c544e9b2ed0d64, type: 2}
-  isOk: 1
-  thrusterOn: 0
+  engine: {fileID: 11400000, guid: d1f6f825ddb2746169e2a83cd37a7d00, type: 2}
   fire: {fileID: 988244596}
   dust: {fileID: 6167150342445622650, guid: 624894be8ec3c411dadf020fa50c9eda, type: 3}
-  rayLength: 1.5
-  minMagnitude: 0.6
-  maxMagnitude: 2.2
-  isBroken: 0
+  EngineBrokenEvent: {fileID: 11400000, guid: 0f9e15f31fc884942921f29269d60742, type: 2}
+  rayLength: 1
 --- !u!1 &1623255147
 GameObject:
   m_ObjectHideFlags: 0
@@ -15533,9 +15623,21 @@ PrefabInstance:
       propertyPath: hpValue
       value: 
       objectReference: {fileID: 11400000, guid: 37975a3a219f1407ea10c33ddf416604, type: 2}
+    - target: {fileID: 4594138525619630524, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594138525619630524, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4594138525619630525, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
       propertyPath: m_Name
       value: Shield HP
+      objectReference: {fileID: 0}
+    - target: {fileID: 4594138525619630525, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b0a710a275f49d09bef83b65d14bf8, type: 3}
@@ -16208,16 +16310,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3deae345076e4daca4f890b73d719e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpIndex: 3
+  gear: {fileID: 11400000, guid: 9ec4d2410ad8e4675a3c7c9f390f1347, type: 2}
   player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
-  explode: {fileID: 11400000, guid: 74577cbdf06064c50af1e22c017907d0, type: 2}
-  explosionForce: {fileID: 11400000, guid: 096c72ce5aa444277a66f26f6cacd6a0, type: 2}
-  isOk: 1
+  gearBrokenEvent: {fileID: 11400000, guid: 0f9e15f31fc884942921f29269d60742, type: 2}
   landingPos: {x: -0.188, y: -0.34}
   rayLength: 1.4
   speed: 0.2
-  minMagnitude: 0.35
-  maxMagnitude: 2
 --- !u!212 &2058860533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16518,16 +16616,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3deae345076e4daca4f890b73d719e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpIndex: 4
+  gear: {fileID: 11400000, guid: 90f89d9e6b628454b8faea74c12a4f81, type: 2}
   player: {fileID: 11400000, guid: 9431f67be91b94bb5a3af4b6c9f5fc14, type: 2}
-  explode: {fileID: 11400000, guid: 74577cbdf06064c50af1e22c017907d0, type: 2}
-  explosionForce: {fileID: 11400000, guid: 096c72ce5aa444277a66f26f6cacd6a0, type: 2}
-  isOk: 1
+  gearBrokenEvent: {fileID: 11400000, guid: 0f9e15f31fc884942921f29269d60742, type: 2}
   landingPos: {x: 0.188, y: -0.34}
   rayLength: 1.4
   speed: 0.2
-  minMagnitude: 0.35
-  maxMagnitude: 2
 --- !u!60 &2079358239
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -12,19 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107fffe298fa64a67b00138ff5d0ae9f, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  maxHps:
-  - 100
-  - 100
-  - 100
-  - 100
-  - 100
-  nowHps:
-  - 100
-  - 100
-  - 100
-  - 100
-  - 100
-  isOk: 0000000000
+  maxHp: 100
+  nowHp: 100
+  isOk: 1
   maxPassenger: 5
   nowPassenger: 0
   maxFuel: 10000

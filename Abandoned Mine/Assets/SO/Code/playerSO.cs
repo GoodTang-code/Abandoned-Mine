@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "SO/Player")]
 public class playerSO : ScriptableObject
 {
-    public float[] maxHps;
-    public float[] nowHps;
-    public bool[] isOk;
+    public float maxHp;
+    public float nowHp;
+    public bool isOk;
     public int maxPassenger;
     public int nowPassenger;
     public float maxFuel;
@@ -31,11 +31,9 @@ public class playerSO : ScriptableObject
 
     public void RepairAll()
     {
-        for (int i = 0; i < maxHps.Length; i++)
-        {
-            nowHps[i] = maxHps[i];
-        }
+            nowHp = maxHp;
     }
+
     public void Refuel()
     {
         nowFuel = maxFuel;
