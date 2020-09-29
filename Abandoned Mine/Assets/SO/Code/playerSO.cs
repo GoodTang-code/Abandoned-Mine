@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player", menuName = "SO/Player", order = 1)]
+[CreateAssetMenu(fileName = "Player", menuName = "SO/Player")]
 public class playerSO : ScriptableObject
 {
     public float[] maxHps;
     public float[] nowHps;
+    public bool[] isOk;
     public int maxPassenger;
     public int nowPassenger;
     public float maxFuel;

@@ -117,6 +117,12 @@ public class Player : MonoBehaviour
         //}
 
     }
+
+    public void PartActive()
+    {
+
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         float impact = col.relativeVelocity.magnitude;

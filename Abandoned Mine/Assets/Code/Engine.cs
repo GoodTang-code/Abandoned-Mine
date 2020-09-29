@@ -6,6 +6,9 @@ public class Engine : MonoBehaviour
 {
     public int hpIndex;
     public playerSO player;
+    public EffectSO explode;
+    public FloatVariable explosionForce;
+
     public bool isOk = true;
     public bool thrusterOn = false;
 
@@ -40,23 +43,22 @@ public class Engine : MonoBehaviour
         //foreach (ContactPoint2D contact in col.contacts)  Debug.DrawRay(contact.point, contact.normal, Color.white);
     }
 
-    private void Update()
-    {
-        if (player.nowFuel <= 0 | player.nowHps[hpIndex] <= 0f)
-            isOk = false;
-    }
     void FixedUpdate()
     {
-        if (player.nowHps[hpIndex] <= 0)
+        if (player.nowHps[hpIndex] < 0 && isOk)
         {
             player.nowHps[hpIndex] = 0;
-            spawnBroken();
-            gameObject.SetActive(false);
+            Explosion();
             isOk = false;
-        }else
+        }
+        else if (player.nowHps[hpIndex] > 0)
         {
             isOk = true;
         }
+
+        if (player.nowFuel <= 0)
+            isOk = false;
+
 
         if (thrusterOn && isOk)
         {
@@ -73,8 +75,31 @@ public class Engine : MonoBehaviour
         if (hit1) Instantiate(dust, hit1.point, dust.transform.rotation);
     }
 
-    void spawnBroken()
+    void Explosion()
     {
+        float m = hpIndex % 2;
+        int rotateDirection = 1;
+        if (m > 0) rotateDirection = -1;
+
+        // Addforce
+        Collider2D[] cols = Physics2D.OverlapCircleAll((Vector2)transform.position, 30);
+        Debug.Log("1");
+        foreach (Collider2D nearbyObj in cols)
+        {
+
+            Debug.Log("2");
+            Rigidbody2D rb = nearbyObj.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Debug.Log(rb);
+                rb.AddForce((rb.position - (Vector2)transform.position) * explosionForce.value[0]);
+                rb.AddTorque(explosionForce.value[1] * rotateDirection);
+            }
+        }
+
+        explode.pos = transform.position;
+        explode.rotation = transform.rotation;
+        explode.explodeSpawn();
 
     }
 }

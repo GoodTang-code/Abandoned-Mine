@@ -24,6 +24,7 @@ MonoBehaviour:
   - 100
   - 100
   - 100
+  isOk: 0000000000
   maxPassenger: 5
   nowPassenger: 0
   maxFuel: 10000
