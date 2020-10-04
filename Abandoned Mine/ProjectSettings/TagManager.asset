@@ -19,7 +19,7 @@ TagManager:
   - 
   - DungeonTile
   - Player
-  - 
+  - Background
   - 
   - 
   - 
@@ -42,6 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1052955741
+    locked: 0
+  - name: DungeonTile
+    uniqueID: 1656846797
+    locked: 0
+  - name: Player
+    uniqueID: 3337870363
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
