@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 107fffe298fa64a67b00138ff5d0ae9f, type: 3}
-  m_Name: Player
+  m_Name: Main_Player
   m_EditorClassIdentifier: 
   maxHp: 100
   nowHp: 100
   isOk: 1
   maxPassenger: 5
-  nowPassenger: 0
+  nowPassenger: 5
   maxFuel: 10000
   nowFuel: 10000
   shipWeight: 6000

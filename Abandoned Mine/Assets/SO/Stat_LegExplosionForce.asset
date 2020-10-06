@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e1a53debb44347998f7c049c1711b3d, type: 3}
-  m_Name: EngineExplosionForce
+  m_Name: Stat_LegExplosionForce
   m_EditorClassIdentifier: 
   value:
   - 500000
-  - 70000
+  - 100000
